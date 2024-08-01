@@ -1,15 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>American Counter</title>
-  <script src="./year-picker.js" defer></script>
-  <link rel="stylesheet" href="./output.css">
-</head>
-<body>
-  <div class="year-picker-container bg-white shadow-2xl rounded-lg overflow-hidden w-52 h-64">
-    <ul class="list-none p-0 m-0 h-full overflow-y-scroll scroll-auto relative snap-y snap-mandatory" id="yearPicker">
-    </ul>
-  </div>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <title>American Counter</title>
+        <script src="./year-picker.js" defer></script>
+        <link rel="stylesheet" href="./output.css" />
+    </head>
+    <body>
+        <div class="flex flex-col items-center rounded-xl bg-white p-8 shadow-2xl">
+            <h1 class="mb-8 text-5xl font-bold">American Counter</h1>
+            <ul class="toggle mb-2 flex select-none flex-row items-center gap-2 rounded-full border-[0.5px] border-gray-200 p-1 text-xs shadow-md *:cursor-pointer *:rounded-full *:p-2 *:transition-colors">
+                <li class="active">Year</li>
+                <li>Duration</li>
+            </ul>
+            <label>
+                <textarea id="field" class="h-8 resize-none rounded-md border-[0.5px] border-gray-200 text-center text-xl shadow-md" cols="8" autocomplete="on">1776</textarea>
+            </label>
+            <div class="year-picker-container h-40 w-full rounded-xl border border-gray-200 bg-gray-50 shadow-md">
+                <ul class="year-picker relative m-0 h-full snap-y snap-mandatory list-none overflow-y-scroll scroll-auto p-0" id="yearPicker"></ul>
+            </div>
+        </div>
+    </body>
 </html>

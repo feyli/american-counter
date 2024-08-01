@@ -4,13 +4,31 @@
 
 body,
 html {
-  @apply h-full w-full bg-gray-100 flex items-center justify-center;
+    @apply flex h-full w-full items-center justify-center bg-gray-100;
 }
 
-.year-picker-container li {
-  @apply p-2.5 text-center cursor-pointer transition-colors duration-300 snap-center;
+.toggle li.active {
+    @apply bg-blue-600 text-white;
+}
+
+.toggle li:hover:not(.active) {
+    @apply bg-blue-200;
+}
+
+.year-picker {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    @apply select-none;
+}
+
+.year-picker::-webkit-scrollbar {
+    @apply hidden;
+}
+
+.year-picker li {
+    @apply h-10 snap-center content-center p-1 text-center opacity-50 transition-all duration-300;
 }
 
 .selected {
-  @apply bg-blue-500 text-white;
+    @apply text-2xl font-bold !opacity-100;
 }
