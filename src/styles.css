@@ -7,6 +7,11 @@ html {
     @apply flex h-full w-full items-center justify-center bg-gray-100;
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
 .toggle li.active {
     @apply bg-blue-600 text-white;
 }

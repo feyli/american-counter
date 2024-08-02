@@ -1,6 +1,5 @@
 const yearPicker = document.getElementById("yearPicker");
-let startYear = new Date().getFullYear() - 500;
-const endYear = new Date().getFullYear();
+const initialYear = 1776;
 const field = document.getElementById("field");
 
 const generateYears = (start, end) => {
@@ -13,20 +12,39 @@ const generateYears = (start, end) => {
   return fragment;
 };
 
-const addYearsToStart = () => {
-  const firstYear = parseInt(yearPicker.firstElementChild.textContent);
-  const newStartYear = firstYear - 500;
-  yearPicker.prepend(generateYears(newStartYear, firstYear - 1));
+const addYearsToStart = (fragment) => {
+  yearPicker.prepend(fragment);
+};
+
+const addYearsToEnd = (fragment) => {
+  yearPicker.appendChild(fragment);
+};
+
+const updateYearsAround = () => {
+  const selectedYear = getCurrentlySelected().textContent;
+  const elements = document.querySelectorAll(".year-picker-container li");
+  elements.forEach((element) => {
+    const year = parseInt(element.textContent);
+    if (Math.abs(year - selectedYear) > 1000) {
+      element.remove();
+    }
+  });
 };
 
 const onScroll = () => {
+  const firstYear = parseInt(yearPicker.firstElementChild.textContent);
+  const lastYear = parseInt(yearPicker.lastElementChild.textContent);
   const scrollTop = yearPicker.scrollTop;
   const scrollHeight = yearPicker.scrollHeight;
 
   if (scrollTop === 0) {
     const oldHeight = scrollHeight;
-    addYearsToStart();
+    addYearsToStart(generateYears(firstYear - 500, firstYear - 1));
     yearPicker.scrollTop = yearPicker.scrollHeight - oldHeight;
+  }
+
+  if (scrollTop + yearPicker.clientHeight === scrollHeight) {
+    addYearsToEnd(generateYears(lastYear + 1, lastYear + 500));
   }
 
   const elements = document.querySelectorAll(".year-picker-container li");
@@ -34,27 +52,22 @@ const onScroll = () => {
   elements.forEach((element) => element.classList.remove("selected"));
   selected.classList.add("selected");
   field.value = selected.textContent;
+  updateYearsAround();
 };
 
 const onChange = () => {
   // stop process if another keystroke within 500ms
   clearTimeout(onChange.timeout);
   onChange.timeout = setTimeout(() => {
-    const firstYear = parseInt(yearPicker.firstElementChild.textContent);
-    if (field.value < firstYear) {
-      let gap = firstYear - field.value;
-      while (gap > 0) {
-        addYearsToStart();
-        gap -= 500;
-      }
-    } else if (field.value > endYear) field.value = 1776;
+    const newYear = parseInt(field.value);
+    yearPicker.innerHTML = "";
+    addYearsToEnd(generateYears(newYear - 1000, newYear + 1000));
     const elements = document.querySelectorAll(".year-picker-container li");
-    elements.forEach((element) => element.classList.remove("selected"));
-    const selected = Array.from(elements).find(
-      (element) => element.textContent === field.value,
+    const targetYear = Array.from(elements).find(
+      (element) => parseInt(element.textContent) === newYear,
     );
-    selected.classList.add("selected");
-    selected.scrollIntoView({ behavior: "instant", block: "center" });
+    targetYear.classList.add("selected");
+    targetYear.scrollIntoView({ behavior: "instant", block: "center" });
   }, 500);
 };
 
@@ -80,9 +93,8 @@ const getCurrentlySelected = () => {
   return closestElement;
 };
 
-yearPicker.appendChild(generateYears(startYear, endYear));
+addYearsToStart(generateYears(initialYear - 1000, initialYear + 1000));
 yearPicker.scrollTop =
-  yearPicker.scrollHeight -
-  yearPicker.firstElementChild.clientHeight * (endYear - 1774);
+  yearPicker.scrollHeight / 2 - yearPicker.clientHeight / 2;
 yearPicker.addEventListener("scroll", onScroll);
 field.addEventListener("change", onChange);
