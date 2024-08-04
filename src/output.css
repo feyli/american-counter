@@ -554,14 +554,6 @@ video {
   --tw-contain-style:  ;
 }
 
-.relative {
-  position: relative;
-}
-
-.m-0 {
-  margin: 0px;
-}
-
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -578,50 +570,22 @@ video {
   display: flex;
 }
 
+.hidden {
+  display: none;
+}
+
 .h-40 {
   height: 10rem;
-}
-
-.h-8 {
-  height: 2rem;
-}
-
-.h-full {
-  height: 100%;
 }
 
 .w-full {
   width: 100%;
 }
 
-.w-16 {
-  width: 4rem;
-}
-
-.w-32 {
-  width: 8rem;
-}
-
 .select-none {
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
-}
-
-.resize-none {
-  resize: none;
-}
-
-.snap-y {
-  scroll-snap-type: y var(--tw-scroll-snap-strictness);
-}
-
-.snap-mandatory {
-  --tw-scroll-snap-strictness: mandatory;
-}
-
-.list-none {
-  list-style-type: none;
 }
 
 .flex-row {
@@ -640,20 +604,8 @@ video {
   gap: 0.5rem;
 }
 
-.overflow-y-scroll {
-  overflow-y: scroll;
-}
-
-.scroll-auto {
-  scroll-behavior: auto;
-}
-
 .rounded-full {
   border-radius: 9999px;
-}
-
-.rounded-md {
-  border-radius: 0.375rem;
 }
 
 .rounded-xl {
@@ -683,10 +635,6 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.p-0 {
-  padding: 0px;
-}
-
 .p-1 {
   padding: 0.25rem;
 }
@@ -695,18 +643,9 @@ video {
   padding: 2rem;
 }
 
-.text-center {
-  text-align: center;
-}
-
 .text-5xl {
   font-size: 3rem;
   line-height: 1;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
 }
 
 .text-xs {
@@ -758,19 +697,45 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: rgb(191 219 254 / var(--tw-bg-opacity));
 }
 
-.year-picker {
+.field {
+  margin-bottom: 0.5rem;
+  height: 2rem;
+  width: 8rem;
+  resize: none;
+  border-radius: 0.375rem;
+  border-width: 0.5px;
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
+  text-align: center;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
+.picker {
   -ms-overflow-style: none;
   scrollbar-width: none;
+  position: relative;
+  margin: 0px;
+  height: 100%;
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+  scroll-snap-type: y var(--tw-scroll-snap-strictness);
+  --tw-scroll-snap-strictness: mandatory;
+  list-style-type: none;
+  overflow-y: scroll;
+  scroll-behavior: auto;
+  padding: 0px;
 }
 
-.year-picker::-webkit-scrollbar {
+.picker::-webkit-scrollbar {
   display: none;
 }
 
-.year-picker li {
+.picker li {
   height: 2.5rem;
   scroll-snap-align: center;
   align-content: center;

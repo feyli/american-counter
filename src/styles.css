@@ -20,17 +20,21 @@ input[type="number"]::-webkit-outer-spin-button {
     @apply bg-blue-200;
 }
 
-.year-picker {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    @apply select-none;
+.field {
+    @apply mb-2 h-8 w-32 resize-none rounded-md border-[0.5px] border-gray-200 text-center text-xl shadow-md;
 }
 
-.year-picker::-webkit-scrollbar {
+.picker {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    @apply relative m-0 h-full select-none snap-y snap-mandatory list-none overflow-y-scroll scroll-auto p-0;
+}
+
+.picker::-webkit-scrollbar {
     @apply hidden;
 }
 
-.year-picker li {
+.picker li {
     @apply h-10 snap-center content-center p-1 text-center opacity-50 transition-all duration-300;
 }
 

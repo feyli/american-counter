@@ -3,21 +3,26 @@
     <head>
         <meta charset="UTF-8" />
         <title>American Counter</title>
-        <script src="./year-picker.js" defer></script>
+        <script src="./js/year-picker.js" defer></script>
+        <script src="./js/age-picker.js" defer></script>
+        <script src="./js/switch-mode.js" defer></script>
         <link rel="stylesheet" href="./output.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     </head>
     <body>
         <div class="flex flex-col items-center rounded-xl bg-white p-8 shadow-2xl">
             <h1 class="mb-8 text-5xl font-bold">American Counter</h1>
             <ul class="toggle mb-2 flex select-none flex-row items-center gap-2 rounded-full border-[0.5px] border-gray-200 p-1 text-xs shadow-md *:cursor-pointer *:rounded-full *:p-2 *:transition-colors">
-                <li class="active">Year</li>
-                <li>Duration</li>
+                <li id="year-button" class="active">Year</li>
+                <li id="age-button">Age</li>
             </ul>
             <label>
-                <input type="number" value="1776" id="field" class="mb-2 h-8 w-32 resize-none rounded-md border-[0.5px] border-gray-200 text-center text-xl shadow-md" />
+                <input type="number" value="1776" id="yearField" class="field" />
+                <input type="number" value="500" id="ageField" class="field hidden" />
             </label>
-            <div class="year-picker-container h-40 w-full rounded-xl border border-gray-200 bg-gray-50 shadow-md">
-                <ul class="year-picker relative m-0 h-full snap-y snap-mandatory list-none overflow-y-scroll scroll-auto p-0" id="yearPicker"></ul>
+            <div class="picker-container h-40 w-full rounded-xl border border-gray-200 bg-gray-50 shadow-md">
+                <ul class="year-picker picker"></ul>
+                <ul class="age-picker picker hidden"></ul>
             </div>
         </div>
     </body>
