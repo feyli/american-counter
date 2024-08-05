@@ -23,6 +23,7 @@ const updateHighlightValuesWithYear = () => {
 };
 
 const generateYears = (start, end) => {
+  if (end > new Date().getFullYear()) end = new Date().getFullYear();
   const fragment = document.createDocumentFragment();
   for (let year = start; year <= end; year++) {
     const li = document.createElement("li");
@@ -115,8 +116,7 @@ const getSelectedYear = () => {
 };
 
 addYearsToStart(generateYears(initialYear - 500, initialYear + 500));
-yearPicker.scrollTop =
-  yearPicker.scrollHeight / 2 - yearPicker.clientHeight / 2;
+yearPicker.scrollTop = yearPicker.firstElementChild.clientHeight * 499;
 yearPicker.addEventListener("scroll", onYearScroll);
 yearField.addEventListener("change", onYearChange);
 addEventListener("readyToUpdateWithYear", updateHighlightValuesWithYear);
