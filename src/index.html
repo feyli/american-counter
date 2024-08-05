@@ -6,12 +6,15 @@
         <script src="./js/year-picker.js" defer></script>
         <script src="./js/age-picker.js" defer></script>
         <script src="./js/main.js" defer></script>
-        <link rel="stylesheet" href="./output.css" />
+        <link rel="stylesheet" href="./css/output.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     </head>
     <body>
         <div class="flex flex-col items-center p-8 sm:rounded-xl sm:bg-white sm:shadow-2xl dark:sm:bg-gray-900">
-            <h1 class="text-4xl font-bold sm:text-5xl">American Counter</h1>
+            <header class="flex flex-col gap-2">
+                <h1 class="text-4xl font-bold sm:text-5xl">American Counter</h1>
+                <a href="./about.html" class="text-md text-blue-500 sm:self-start">What's this?</a>
+            </header>
             <ul class="toggle m-8 flex select-none flex-row items-center gap-2 rounded-full border border-gray-200 p-1 text-xs shadow-md *:cursor-pointer *:rounded-full *:p-2 *:transition-colors dark:border-gray-600">
                 <li id="year-button" class="active">Year</li>
                 <li id="age-button">Age</li>

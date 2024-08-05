@@ -5,6 +5,7 @@
     "tailwindcss": "^3.4.7"
   },
   "scripts": {
-    "watch": "tailwindcss -i src/styles.css -o src/output.css --watch"
+    "watchIndex": "tailwindcss -i src/css/styles.css -o src/css/output.css --watch",
+    "watchAbout": "tailwindcss -i src/css/about.css -o src/css/about-output.css --watch"
   }
 }

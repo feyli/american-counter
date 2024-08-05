@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+html {
+    @apply flex h-full w-full items-center justify-center text-black sm:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:sm:bg-gray-800;
+}
