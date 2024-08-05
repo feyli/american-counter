@@ -14,11 +14,9 @@ const updateHighlightValuesWithYear = () => {
   document.querySelector("#itemAge").textContent = age.toString();
   document.querySelector("#itemYear").textContent = yearField.value;
   document.querySelector("#itemUSAge").textContent = USAge;
-  if (USAge >= 2 || USAge <= -2)
-    document.querySelector("#pluralTime").textContent = "times";
+  if (USAge >= 2) document.querySelector("#pluralTime").textContent = "times";
   else document.querySelector("#pluralTime").textContent = "time";
-  if (age > 1 || age < -1)
-    document.querySelector("#pluralYear").textContent = "years";
+  if (age > 1) document.querySelector("#pluralYear").textContent = "years";
   else document.querySelector("#pluralYear").textContent = "year";
 };
 
@@ -116,7 +114,11 @@ const getSelectedYear = () => {
 };
 
 addYearsToStart(generateYears(initialYear - 500, initialYear + 500));
-yearPicker.scrollTop = yearPicker.firstElementChild.clientHeight * 499;
 yearPicker.addEventListener("scroll", onYearScroll);
 yearField.addEventListener("change", onYearChange);
+setTimeout(
+  () =>
+    (yearPicker.scrollTop = yearPicker.firstElementChild.clientHeight * 499),
+  100,
+);
 addEventListener("readyToUpdateWithYear", updateHighlightValuesWithYear);
