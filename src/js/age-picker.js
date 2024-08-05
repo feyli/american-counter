@@ -1,6 +1,21 @@
 const agePicker = document.querySelector(".age-picker");
-const initialAge = 500;
+const initialAge = 2024 - 1776;
 const ageField = document.querySelector("#ageField");
+const readyToUpdateWithAge = new Event("readyToUpdateWithAge");
+
+const updateHightlightValuesWithAge = () => {
+  const USAge = parseInt(ageField.value) / (new Date().getFullYear() - 1776);
+  document.querySelector("#itemAge").textContent = ageField.value;
+  document.querySelector("#itemYear").textContent = (
+    new Date().getFullYear() - ageField.value
+  ).toString();
+  document.querySelector("#itemUSAge").textContent = USAge.toFixed(1);
+  if (USAge >= 2) document.querySelector("#pluralTime").textContent = "times";
+  else document.querySelector("#pluralTime").textContent = "time";
+  if (ageField.value > 1)
+    document.querySelector("#pluralYear").textContent = "years";
+  else document.querySelector("#pluralYear").textContent = "year";
+};
 
 const generateValues = (start, end) => {
   if (start < 0) start = 0;
@@ -47,10 +62,12 @@ const onAgeScroll = () => {
   selected.classList.add("selected");
   ageField.value = selected.textContent;
   updateValuesAround();
+  dispatchEvent(readyToUpdateWithAge);
 };
 
 const onAgeChange = () => {
-  const newAge = parseInt(ageField.value);
+  let newAge = parseInt(ageField.value);
+  if (newAge < 0) newAge = 0;
   agePicker.innerHTML = "";
   addValuesToEnd(generateValues(newAge - 500, newAge + 500));
   const elements = document.querySelectorAll(".age-picker li");
@@ -59,6 +76,7 @@ const onAgeChange = () => {
   );
   targetAge.classList.add("selected");
   targetAge.scrollIntoView({ behavior: "instant", block: "center" });
+  dispatchEvent(readyToUpdateWithAge);
 };
 
 const getSelectedAge = () => {
@@ -87,3 +105,4 @@ const getSelectedAge = () => {
 addValuesToStart(generateValues(initialAge - 500, initialAge + 500));
 agePicker.addEventListener("scroll", onAgeScroll);
 ageField.addEventListener("change", onAgeChange);
+addEventListener("readyToUpdateWithAge", updateHightlightValuesWithAge);

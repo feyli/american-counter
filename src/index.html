@@ -5,24 +5,29 @@
         <title>American Counter</title>
         <script src="./js/year-picker.js" defer></script>
         <script src="./js/age-picker.js" defer></script>
-        <script src="./js/switch-mode.js" defer></script>
+        <script src="./js/main.js" defer></script>
         <link rel="stylesheet" href="./output.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     </head>
     <body>
-        <div class="flex flex-col items-center rounded-xl bg-white p-8 shadow-2xl">
+        <div class="flex flex-col items-center p-8 sm:rounded-xl sm:bg-white sm:shadow-2xl">
             <h1 class="mb-8 text-5xl font-bold">American Counter</h1>
             <ul class="toggle mb-2 flex select-none flex-row items-center gap-2 rounded-full border-[0.5px] border-gray-200 p-1 text-xs shadow-md *:cursor-pointer *:rounded-full *:p-2 *:transition-colors">
                 <li id="year-button" class="active">Year</li>
                 <li id="age-button">Age</li>
             </ul>
             <label>
-                <input type="number" value="1776" id="yearField" class="field" />
-                <input type="number" value="500" id="ageField" class="field hidden" />
+                <input type="number" value="1776" id="yearField" class="field year-mode" />
+                <input type="number" value="500" id="ageField" class="field age-mode hidden" />
             </label>
             <div class="picker-container h-40 w-full rounded-xl border border-gray-200 bg-gray-50 shadow-md">
-                <ul class="year-picker picker"></ul>
-                <ul class="age-picker picker hidden"></ul>
+                <ul class="year-picker year-mode picker"></ul>
+                <ul class="age-picker age-mode picker hidden"></ul>
+            </div>
+            <div class="mt-8 text-xl font-medium">
+                <p>An item that is <span id="itemAge" class="highlight-value">---</span> <span id="pluralYear">year</span> old (created in <span id="itemYear" class="highlight-value">1776</span>) is</p>
+                <p><span id="itemUSAge" class="highlight-value">1.0</span> <span id="pluralTime">time</span></p>
+                <p>the age of the United States of America.</p>
             </div>
         </div>
     </body>

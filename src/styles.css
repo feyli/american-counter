@@ -4,7 +4,11 @@
 
 body,
 html {
-    @apply flex h-full w-full items-center justify-center bg-gray-100;
+    @apply flex h-full w-full items-center justify-center sm:bg-gray-100;
+}
+
+* {
+    @apply text-center;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
@@ -21,7 +25,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .field {
-    @apply mb-2 h-8 w-32 resize-none rounded-md border-[0.5px] border-gray-200 text-center text-xl shadow-md;
+    @apply mb-2 h-8 w-32 resize-none rounded-md border-[0.5px] border-gray-200 text-xl shadow-md;
 }
 
 .picker {
@@ -35,9 +39,21 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .picker li {
-    @apply h-10 snap-center content-center p-1 text-center opacity-50 transition-all duration-300;
+    @apply h-10 snap-center content-center p-1 opacity-50 transition-all duration-300;
 }
 
 .selected {
     @apply text-2xl font-bold !opacity-100;
+}
+
+.highlight-value {
+    @apply font-bold text-blue-600;
+}
+
+.footer {
+    @apply text-xl font-medium;
+}
+
+#itemUSAge {
+    @apply text-3xl font-bold;
 }

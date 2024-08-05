@@ -1,6 +1,23 @@
 const yearPicker = document.querySelector(".year-picker");
 const initialYear = 1776;
 const yearField = document.querySelector("#yearField");
+const readyToUpdateWithYear = new Event("readyToUpdateWithYear");
+
+const updateHighlightValuesWithYear = () => {
+  const age = new Date().getFullYear() - parseInt(yearField.value);
+  const USAge =
+    (new Date().getFullYear() - parseInt(yearField.value)) /
+    (new Date().getFullYear() - 1776);
+  document.querySelector("#itemAge").textContent = age.toString();
+  document.querySelector("#itemYear").textContent = yearField.value;
+  document.querySelector("#itemUSAge").textContent = USAge.toFixed(1);
+  if (USAge >= 2 || USAge <= -2)
+    document.querySelector("#pluralTime").textContent = "times";
+  else document.querySelector("#pluralTime").textContent = "time";
+  if (age > 1 || age < -1)
+    document.querySelector("#pluralYear").textContent = "years";
+  else document.querySelector("#pluralYear").textContent = "year";
+};
 
 const generateYears = (start, end) => {
   const fragment = document.createDocumentFragment();
@@ -53,6 +70,7 @@ const onYearScroll = () => {
   selected.classList.add("selected");
   yearField.value = selected.textContent;
   updateYearsAround();
+  dispatchEvent(readyToUpdateWithYear);
 };
 
 const onYearChange = () => {
@@ -65,6 +83,7 @@ const onYearChange = () => {
   );
   targetYear.classList.add("selected");
   targetYear.scrollIntoView({ behavior: "instant", block: "center" });
+  dispatchEvent(readyToUpdateWithYear);
 };
 
 const getSelectedYear = () => {
@@ -95,3 +114,4 @@ yearPicker.scrollTop =
   yearPicker.scrollHeight / 2 - yearPicker.clientHeight / 2;
 yearPicker.addEventListener("scroll", onYearScroll);
 yearField.addEventListener("change", onYearChange);
+addEventListener("readyToUpdateWithYear", updateHighlightValuesWithYear);
