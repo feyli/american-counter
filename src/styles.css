@@ -4,7 +4,7 @@
 
 body,
 html {
-    @apply flex h-full w-full items-center justify-center sm:bg-gray-100;
+    @apply flex h-full w-full items-center justify-center text-black sm:bg-gray-100 dark:bg-gray-900 dark:text-gray-200 dark:sm:bg-gray-800;
 }
 
 * {
@@ -21,17 +21,26 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .toggle li:hover:not(.active) {
-    @apply bg-blue-200;
+    @apply bg-blue-200 dark:bg-gray-700;
 }
 
 .field {
-    @apply mb-2 h-8 w-32 resize-none rounded-md border-[0.5px] border-gray-200 text-xl shadow-md;
+    @apply h-full w-24 resize-none rounded-md border border-gray-200 text-xl shadow-md dark:border-gray-600 dark:bg-gray-800;
+}
+
+.change-value {
+    @apply shrink touch-manipulation rounded-md bg-blue-500 p-1 text-xs font-semibold text-white shadow-md transition-colors duration-200;
+}
+
+.change-value:hover {
+    @apply bg-blue-600;
 }
 
 .picker {
     -ms-overflow-style: none;
     scrollbar-width: none;
     @apply relative m-0 h-full select-none snap-y snap-mandatory list-none overflow-y-scroll scroll-auto p-0;
+    @apply rounded-xl border border-gray-200 shadow-md dark:border-gray-600;
 }
 
 .picker::-webkit-scrollbar {

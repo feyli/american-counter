@@ -29,3 +29,11 @@ ageButton.addEventListener("click", () => {
       agePicker.firstElementChild.clientHeight * (initialAge - 1);
   firstSwitch = false;
 });
+
+document.querySelectorAll(".change-value").forEach((element) => {
+  element.addEventListener("click", () => {
+    const field = document.querySelector(".field:not(.hidden)");
+    field.value = parseInt(field.value) + parseInt(element.textContent);
+    field.dispatchEvent(new Event("change"));
+  });
+});

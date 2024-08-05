@@ -5,12 +5,15 @@ const readyToUpdateWithYear = new Event("readyToUpdateWithYear");
 
 const updateHighlightValuesWithYear = () => {
   const age = new Date().getFullYear() - parseInt(yearField.value);
-  const USAge =
-    (new Date().getFullYear() - parseInt(yearField.value)) /
-    (new Date().getFullYear() - 1776);
+  const USAge = parseFloat(
+    (
+      (new Date().getFullYear() - parseInt(yearField.value)) /
+      (new Date().getFullYear() - 1776)
+    ).toFixed(1),
+  ).toString();
   document.querySelector("#itemAge").textContent = age.toString();
   document.querySelector("#itemYear").textContent = yearField.value;
-  document.querySelector("#itemUSAge").textContent = USAge.toFixed(1);
+  document.querySelector("#itemUSAge").textContent = USAge;
   if (USAge >= 2 || USAge <= -2)
     document.querySelector("#pluralTime").textContent = "times";
   else document.querySelector("#pluralTime").textContent = "time";
@@ -58,10 +61,12 @@ const onYearScroll = () => {
     const oldHeight = scrollHeight;
     addYearsToStart(generateYears(firstYear - 500, firstYear - 1));
     yearPicker.scrollTop = yearPicker.scrollHeight - oldHeight;
+    updateYearsAround();
   }
 
   if (scrollTop + yearPicker.clientHeight === scrollHeight) {
     addYearsToEnd(generateYears(lastYear + 1, lastYear + 500));
+    updateYearsAround();
   }
 
   const elements = document.querySelectorAll(".year-picker li");
@@ -69,12 +74,12 @@ const onYearScroll = () => {
   elements.forEach((element) => element.classList.remove("selected"));
   selected.classList.add("selected");
   yearField.value = selected.textContent;
-  updateYearsAround();
   dispatchEvent(readyToUpdateWithYear);
 };
 
 const onYearChange = () => {
   const newYear = parseInt(yearField.value);
+  if (!newYear) return;
   yearPicker.innerHTML = "";
   addYearsToEnd(generateYears(newYear - 500, newYear + 500));
   const elements = document.querySelectorAll(".year-picker li");

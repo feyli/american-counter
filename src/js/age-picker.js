@@ -4,12 +4,14 @@ const ageField = document.querySelector("#ageField");
 const readyToUpdateWithAge = new Event("readyToUpdateWithAge");
 
 const updateHightlightValuesWithAge = () => {
-  const USAge = parseInt(ageField.value) / (new Date().getFullYear() - 1776);
+  const USAge = parseFloat(
+    (parseInt(ageField.value) / (new Date().getFullYear() - 1776)).toFixed(1),
+  ).toString();
   document.querySelector("#itemAge").textContent = ageField.value;
   document.querySelector("#itemYear").textContent = (
     new Date().getFullYear() - ageField.value
   ).toString();
-  document.querySelector("#itemUSAge").textContent = USAge.toFixed(1);
+  document.querySelector("#itemUSAge").textContent = USAge;
   if (USAge >= 2) document.querySelector("#pluralTime").textContent = "times";
   else document.querySelector("#pluralTime").textContent = "time";
   if (ageField.value > 1)
@@ -54,6 +56,7 @@ const onAgeScroll = () => {
 
   if (scrollTop + agePicker.clientHeight === scrollHeight) {
     addValuesToEnd(generateValues(lastValue + 1, lastValue + 500));
+    updateValuesAround();
   }
 
   const elements = document.querySelectorAll(".age-picker li");
@@ -61,13 +64,13 @@ const onAgeScroll = () => {
   elements.forEach((element) => element.classList.remove("selected"));
   selected.classList.add("selected");
   ageField.value = selected.textContent;
-  updateValuesAround();
   dispatchEvent(readyToUpdateWithAge);
 };
 
 const onAgeChange = () => {
   let newAge = parseInt(ageField.value);
   if (newAge < 0) newAge = 0;
+  if (!newAge) return;
   agePicker.innerHTML = "";
   addValuesToEnd(generateValues(newAge - 500, newAge + 500));
   const elements = document.querySelectorAll(".age-picker li");
